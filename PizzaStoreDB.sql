@@ -127,5 +127,25 @@ ALTER TABLE Orders ADD FOREIGN KEY (receipt_id) REFERENCES Payment (receipt_id) 
 
 /* Creating view all customers with total number of orders */
 
-/* Creating view all products */
+GO 
+CREATE VIEW view_1 AS
+SELECT o.cust_id, 
+	c.customer_firstname, 
+	c.customer_lastname, 
+	COUNT (DISTINCT o.order_id)
+FROM Orders as o 
+LEFT JOIN Customers as c 
+ON o.cust_id = c.cust_id
+GROUP BY o.cust_id, 
+	c.customer_firstname, 
+	c.customer_lastname;
+
+/* Creating view list of all products */
+
+GO
+CREATE VIEW view_2 AS
+SELECT product_id, 
+	product_name, 
+	product_category 
+FROM Product;
 
